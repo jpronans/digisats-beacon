@@ -53,7 +53,7 @@ local $bcn_print    = "Sending beacon from $bcn_call via $bcn_path with text: $b
 # These commands work with the Westmountainradio Rigrunner 4005i
 local $user = "username";
 local $pass = "password";
-local $dest = "a.b.c.d"
+local $dest = "a.b.c.d";
 local $on_cmd   = "curl -s --user \"$user\":\"$pass\" http://\"$dest\" --data \"RAILENA0=1\" > /dev/null ";
 local $off_cmd  = "curl -s --user \"$user\":\"$pass\" http://\"$dest\" --data \"RAILENA0=0\" > /dev/null ";
 
