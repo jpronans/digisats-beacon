@@ -26,22 +26,29 @@ local $baud_rate = 57600;
 # Change for your serial port
 local $com_port = "/dev/ttyS5";
 
-# I use -2 as the keps can be a little off.
+# I use -2 as the keps can be a little off, plus you sometimes can start to receive a 
+# Satellite when it is still below the horizon
 local $elevation_mask = -2;
+# Default to International Space Station
 local $default_frequency = 145825000;
 
 # beacon options
+# My Linux AX.25 Port
 local $bcn_port = "1200mk";
-local $bcn_call = "EI7IG";
+local $bcn_call = "YOURCALL";
+
 local $bcn_path = "APRS ARISS";
-local $bcn_lat = "5209.96N";
-local $bcn_long = "00709.65W";
+# Change for your LAT/LONG
+local $bcn_lat = "5200.00N";
+local $bcn_long = "00700.00W";
+
 local $bcn_char = "=";
 local $bcn_sym_1 = "/";
 local $bcn_sym_2 = "y";
-local $bcn_text = "Xastir 2.07 SatGate";
 
-#utilities
+local $bcn_text = "SatGate";
+
+#utilities, change to suit your environment
 local $rig_ctl = "/usr/local/bin/rigctl";
 local $bcn_bin = "/usr/local/sbin/beacon";
 
@@ -99,24 +106,23 @@ my %sats = (
     "aPCSAT"	=>      14582700,
     "bISS" 	=>	14582500,
     "cSTRAND 1"  => 	43756800,
-#    "cISS" 	=>	43755000,
-#    "eFAST1" 	=>	43734500,
+#    "dFAST1" 	=>	43734500,
 #    "eNANOSAILD"  =>	43727000
-#    "eOOREOS" 	=>	43730500,
-#    "fRAX" 	=>	43750500
-#    "cLUSAT"	=>      14582700,
-#    "cXIWANG-1"	=>      43567500,
-#   "bOSCAR-57" 	=>      14580000,
-#   "cCAPE-1"         =>	43524500,
-#   "dOSCAR-32"	=>      43522500,
-#  " cXI-V" 	      =>      43746500,
-#    "eOSCAR-51"   =>      43515000,
-#   "fOSCAR-50"         =>      43679500,
-#  "hPO-28 [+]"         =>      42995000,
-#  "hRS-22"         =>      43535200,
-#  "fHAMSAT"         =>      14586000,
-#  "iCUTE-1"         =>	43740000,
-#    "jOSCAR-27"	=>	43679500
+#    "fOOREOS" 	=>	43730500,
+#    "gRAX" 	=>	43750500
+#    "hLUSAT"	=>      14582700,
+#    "iXIWANG-1"	=>      43567500,
+#    "jOSCAR-57" 	=>      14580000,
+#    "kCAPE-1"         =>	43524500,
+#    "lOSCAR-32"	=>      43522500,
+#    "mXI-V" 	      =>      43746500,
+#    "nOSCAR-51"   =>      43515000,
+#    "oOSCAR-50"         =>      43679500,
+#    "pPO-28 [+]"         =>      42995000,
+#    "qRS-22"         =>      43535200,
+#    "rHAMSAT"         =>      14586000,
+#    "sCUTE-1"         =>	43740000,
+#    "tOSCAR-27"	=>	43679500
 );
 do{	
   foreach $sat (sort keys %sats) {
@@ -154,7 +160,7 @@ sub my_main {
 
   if ($debug)     
   {
-    print "Sleep is $sleep\n";
+    print "Sleeping for $sleep seconds\n";
   }
   # Doing unix-style DNS calls here
   
